@@ -4,8 +4,8 @@ pub fn main() !void {
     var bw = std.io.bufferedWriter(std.io.getStdOut().writer());
     const stdout = bw.writer();
 
-    const width: i32 = 256;
-    const height: i32 = 256;
+    const width = 256;
+    const height = 256;
 
     try stdout.print(
         \\P3
@@ -16,9 +16,9 @@ pub fn main() !void {
 
     for (0..height) |j| {
         for (0..width) |i| {
-            const r: f64 = @as(f64, @floatFromInt(i)) / @as(f64, @floatFromInt(width - 1));
-            const g: f64 = @as(f64, @floatFromInt(j)) / @as(f64, @floatFromInt(height - 1));
-            const b: f64 = 0.0;
+            const r = @as(f64, @floatFromInt(i)) / @as(f64, @floatFromInt(width - 1));
+            const g = @as(f64, @floatFromInt(j)) / @as(f64, @floatFromInt(height - 1));
+            const b = 0.0;
 
             const ir: i32 = @intFromFloat(255.999 * r);
             const ig: i32 = @intFromFloat(255.999 * g);
