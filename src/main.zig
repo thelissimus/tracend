@@ -15,6 +15,8 @@ pub fn main() !void {
     , .{ width, height });
 
     for (0..height) |j| {
+        std.log.info("\rScanlines remaining: {d}", .{height - j});
+
         for (0..width) |i| {
             const r = @as(f64, @floatFromInt(i)) / @as(f64, @floatFromInt(width - 1));
             const g = @as(f64, @floatFromInt(j)) / @as(f64, @floatFromInt(height - 1));
@@ -27,6 +29,8 @@ pub fn main() !void {
             try stdout.print("{d} {d} {d}\n", .{ ir, ig, ib });
         }
     }
+
+    std.log.info("\rDone.\n", .{});
 
     try bw.flush();
 }
