@@ -92,6 +92,14 @@ const Vec3 = struct {
 };
 
 const Point3 = Vec3;
+const Color = Vec3;
+
+fn writeColor(writer: anytype, color: Color) !void {
+    const ir: i32 = @intFromFloat(255.999 * color.x);
+    const ig: i32 = @intFromFloat(255.999 * color.y);
+    const ib: i32 = @intFromFloat(255.999 * color.z);
+    try writer.print("{d} {d} {d}\n", .{ ir, ig, ib });
+}
 
 pub fn main() !void {
     var bw = std.io.bufferedWriter(std.io.getStdOut().writer());
@@ -111,15 +119,11 @@ pub fn main() !void {
         std.log.info("\rScanlines remaining: {d}", .{height - j});
 
         for (0..width) |i| {
-            const r = @as(f64, @floatFromInt(i)) / @as(f64, @floatFromInt(width - 1));
-            const g = @as(f64, @floatFromInt(j)) / @as(f64, @floatFromInt(height - 1));
-            const b = 0.0;
-
-            const ir: i32 = @intFromFloat(255.999 * r);
-            const ig: i32 = @intFromFloat(255.999 * g);
-            const ib: i32 = @intFromFloat(255.999 * b);
-
-            try stdout.print("{d} {d} {d}\n", .{ ir, ig, ib });
+            try writeColor(stdout, Color.init(
+                @as(f64, @floatFromInt(i)) / @as(f64, @floatFromInt(width - 1)),
+                @as(f64, @floatFromInt(j)) / @as(f64, @floatFromInt(height - 1)),
+                0,
+            ));
         }
     }
 
