@@ -2,5 +2,6 @@
 zig-out/
 
 *.ppm
+.DS_Store
 
 .vscode/
