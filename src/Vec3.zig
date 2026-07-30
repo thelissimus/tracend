@@ -44,7 +44,7 @@ pub const Vec3 = struct {
         return Self{ .x = self.x * t, .y = self.y * t, .z = self.z * t };
     }
 
-    pub fn mulMutBy(self: *Self, t: f64) Self {
+    pub fn mulByMut(self: *Self, t: f64) Self {
         self.x *= t;
         self.y *= t;
         self.z *= t;
