@@ -39,7 +39,7 @@ pub fn main(init: std.process.Init) !void {
         }
     }
 
-    std.log.info("\rDone.\n", .{});
-
     try stdout.flush();
+
+    std.log.info("\rDone.\n", .{});
 }
