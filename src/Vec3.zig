@@ -79,14 +79,7 @@ pub const Vec3 = struct {
         return self.x * self.x + self.y * self.y + self.z * self.z;
     }
 
-    pub fn format(
-        self: Self,
-        comptime Fmt: []const u8,
-        options: std.fmt.FormatOptions,
-        writer: anytype,
-    ) !void {
-        _ = Fmt;
-        _ = options;
+    pub fn format(self: Self, writer: *std.Io.Writer) std.Io.Writer.Error!void {
         try writer.print("{d} {d} {d}", .{ self.x, self.y, self.z });
     }
 };

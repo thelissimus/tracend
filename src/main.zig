@@ -1,19 +1,21 @@
 const std = @import("std");
+const Io = std.Io;
 const Vec3 = @import("Vec3.zig").Vec3;
 
 const Point3 = Vec3;
 const Color = Vec3;
 
-fn writeColor(writer: anytype, color: Color) !void {
+fn writeColor(writer: *Io.Writer, color: Color) Io.Writer.Error!void {
     const ir: i32 = @intFromFloat(255.999 * color.x);
     const ig: i32 = @intFromFloat(255.999 * color.y);
     const ib: i32 = @intFromFloat(255.999 * color.z);
     try writer.print("{d} {d} {d}\n", .{ ir, ig, ib });
 }
 
-pub fn main() !void {
-    var bw = std.io.bufferedWriter(std.io.getStdOut().writer());
-    const stdout = bw.writer();
+pub fn main(init: std.process.Init) !void {
+    var stdout_buffer: [4096]u8 = undefined;
+    var stdout_writer = std.Io.File.stdout().writer(init.io, &stdout_buffer);
+    const stdout = &stdout_writer.interface;
 
     const width = 256;
     const height = 256;
@@ -39,5 +41,5 @@ pub fn main() !void {
 
     std.log.info("\rDone.\n", .{});
 
-    try bw.flush();
+    try stdout.flush();
 }
