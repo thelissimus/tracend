@@ -29,7 +29,7 @@ pub const Vec3 = struct {
         self.x += other.x;
         self.y += other.y;
         self.z += other.z;
-        return *self;
+        return self.*;
     }
 
     pub fn sub(self: Self, other: Self) Self {
@@ -48,7 +48,7 @@ pub const Vec3 = struct {
         self.x *= t;
         self.y *= t;
         self.z *= t;
-        return *self;
+        return self.*;
     }
 
     pub fn divBy(self: Self, t: f64) Self {
